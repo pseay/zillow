@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mother Nature - Zillow</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f8f9fa;
+            color: #2a2a33;
+        }
+        .top-bar {
+            background-color: white;
+            height: 72px;
+            display: flex;
+            align-items: center;
+            padding: 0 24px;
+            box-shadow: 0 1px 5px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        .logo {
+            color: #0d61ff;
+            font-weight: bold;
+            font-size: 24px;
+        }
+        .main-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .property-header {
+            display: flex;
+            flex-direction: column;
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+            margin-bottom: 20px;
+        }
+        .property-title {
+            font-size: 28px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        .property-subtitle {
+            font-size: 20px;
+            color: #5b5b66;
+            margin-bottom: 10px;
+        }
+        .property-price {
+            font-size: 32px;
+            font-weight: bold;
+            color: #0d61ff;
+        }
+        .property-images {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            grid-template-rows: repeat(2, 1fr);
+            gap: 10px;
+            margin-bottom: 24px;
+            border-radius: 8px;
+            overflow: hidden;
+            height: 400px;
+        }
+        .image-main {
+            grid-column: span 2;
+            grid-row: span 2;
+            background-color: #4DB6AC;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 32px;
+            color: white;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.3);
+            border-radius: 8px;
+        }
+        .image-secondary {
+            background-color: #80CBC4;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 20px;
+            color: white;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.3);
+            border-radius: 8px;
+        }
+        .property-details {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            gap: 16px;
+            margin-bottom: 24px;
+            padding: 24px;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+        }
+        .detail-item {
+            text-align: center;
+            padding: 10px;
+        }
+        .detail-value {
+            font-size: 22px;
+            font-weight: bold;
+            color: #2a2a33;
+        }
+        .detail-label {
+            color: #72727d;
+            margin-top: 5px;
+        }
+        .property-description {
+            background-color: white;
+            padding: 24px;
+            border-radius: 8px;
+            margin-bottom: 24px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+        }
+        .property-description h2 {
+            margin-top: 0;
+            color: #2a2a33;
+            border-bottom: 1px solid #e5e5e8;
+            padding-bottom: 10px;
+        }
+        .property-description h3 {
+            color: #2a2a33;
+        }
+        .property-description p {
+            line-height: 1.6;
+            color: #2a2a33;
+        }
+        .contact-section {
+            background-color: white;
+            padding: 24px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+            display: flex;
+            flex-direction: column;
+        }
+        .contact-form {
+            margin-bottom: 30px;
+        }
+        .contact-form h2 {
+            color: #2a2a33;
+            border-bottom: 1px solid #e5e5e8;
+            padding-bottom: 10px;
+        }
+        .realtor-info {
+            display: flex;
+            align-items: center;
+            margin-top: 20px;
+        }
+        .realtor-image {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background-color: #26A69A;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-right: 20px;
+            color: white;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.3);
+            font-size: 18px;
+        }
+        .realtor-details {
+            flex: 1;
+        }
+        .realtor-details h3 {
+            margin: 0 0 5px 0;
+            color: #2a2a33;
+        }
+        .realtor-details p {
+            margin: 5px 0;
+            color: #72727d;
+        }
+        .contact-button {
+            background-color: #0d61ff;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            padding: 16px 24px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            width: 100%;
+            margin-top: 16px;
+        }
+        .warning {
+            color: #e53935;
+            font-style: italic;
+            margin-top: 16px;
+            padding: 15px;
+            background-color: #ffebee;
+            border-radius: 8px;
+        }
+        
+        /* Mobile optimizations */
+        @media (max-width: 768px) {
+            .property-images {
+                grid-template-columns: 1fr;
+                grid-template-rows: repeat(5, 150px);
+                height: auto;
+            }
+            .image-main {
+                grid-column: auto;
+                grid-row: span 1;
+            }
+            .property-details {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .realtor-info {
+                flex-direction: column;
+                text-align: center;
+            }
+            .realtor-image {
+                margin-right: 0;
+                margin-bottom: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="top-bar">
+        <div class="logo">Zillow</div>
+    </div>
+    <div class="main-container">
+        <div class="property-header">
+            <div class="property-title">Mother Nature</div>
+            <div class="property-subtitle">Planet Earth</div>
+            <div class="property-price">$100,000,000,000,000</div>
+        </div>
+        <div class="property-images">
+            <div class="image-main">Pristine Rainforest</div>
+            <div class="image-secondary">Crystal Clear Lakes</div>
+            <div class="image-secondary">Majestic Mountains</div>
+            <div class="image-secondary">Vibrant Coral Reefs</div>
+            <div class="image-secondary">Stunning Sunsets</div>
+        </div>
+        <div class="property-details">
+            <div class="detail-item">
+                <div class="detail-value">4.5 Billion</div>
+                <div class="detail-label">Years Old</div>
+            </div>
+            <div class="detail-item">
+                <div class="detail-value">196.9M</div>
+                <div class="detail-label">Square Miles</div>
+            </div>
+            <div class="detail-item">
+                <div class="detail-value">8.7M+</div>
+                <div class="detail-label">Species</div>
+            </div>
+            <div class="detail-item">
+                <div class="detail-value">5</div>
+                <div class="detail-label">Oceans</div>
+            </div>
+            <div class="detail-item">
+                <div class="detail-value">7</div>
+                <div class="detail-label">Continents</div>
+            </div>
+            <div class="detail-item">
+                <div class="detail-value">Priceless</div>
+                <div class="detail-label">Real Value</div>
+            </div>
+        </div>
+        <div class="property-description">
+            <h2>About This Property</h2>
+            <p>Once-in-an-eternity opportunity to own the ultimate property: Mother Nature herself! This unique listing offers unmatched biodiversity, breathtaking landscapes, and self-sustaining ecosystems that have been perfecting themselves for over 4.5 billion years.</p>
+            <p>Features include pristine rainforests, majestic mountain ranges, crystal clear lakes, vast oceans teeming with life, and the most sophisticated climate regulation system in the known universe. Comes complete with 8.7+ million different species, each playing a crucial role in the intricate balance of this extraordinary property.</p>
+            <p>This self-maintaining estate includes its own water cycle, carbon sequestration, and renewable energy sources. The property offers unlimited inspiration, resources for sustainable living, and unparalleled natural beauty that must be seen to be believed.</p>
+            <h3>Location Highlights:</h3>
+            <p>Perfectly positioned in the habitable zone of the Solar System, with ideal proximity to the Sun for comfortable temperatures and sustainable energy. Includes natural satellites for tidal patterns and romantic moonlit nights.</p>
+            <div class="warning">Note: This property is not actually for sale. Mother Nature is priceless and belongs to all living beings. This listing is a creative exercise to highlight the immeasurable value of our natural world.</div>
+        </div>
+        <div class="contact-section">
+            <div class="contact-form">
+                <h2>Contact Agent</h2>
+                <p>Interested in learning more about how you can help preserve and protect this priceless property? Reach out to become a steward of Mother Nature.</p>
+                <button class="contact-button">Become an Environmental Steward</button>
+            </div>
+            <div class="realtor-info">
+                <div class="realtor-image">Gaia</div>
+                <div class="realtor-details">
+                    <h3>Mother Nature</h3>
+                    <p>The original owner and caretaker</p>
+                    <p>4.5 billion years of property management experience</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
